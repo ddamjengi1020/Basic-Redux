@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { actionCreators } from "../store";
 import Todo from "../component/Todo";
 
-function Home({ toDos, addTodo }) {
+function Home({ addTodo }) {
   const [text, setText] = useState("");
   const getVal = localStorage.getItem("toDos");
   const currentVal = JSON.parse(getVal);
@@ -34,9 +34,9 @@ function Home({ toDos, addTodo }) {
   );
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(state) {
   return {
-    toDos: state
+    state
   };
 }
 

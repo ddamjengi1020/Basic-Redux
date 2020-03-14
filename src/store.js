@@ -1,7 +1,9 @@
 import { createStore } from "redux";
 
+// localStorage
 const val = localStorage.getItem("toDos");
 const test = JSON.parse(val);
+const setItem = state => localStorage.setItem("toDos", JSON.stringify(state));
 
 // Action name
 const ADD = "ADD";
@@ -21,12 +23,12 @@ const reducer = (state = test || [], action) => {
   let saveVal = state;
   switch (action.type) {
     case ADD:
-      saveVal = [...state, { text: action.text, id: Date.now() }];
-      localStorage.setItem("toDos", JSON.stringify(saveVal));
+      saveVal = [{ text: action.text, id: Date.now() }, ...state];
+      setItem(saveVal);
       return saveVal;
     case DELETE:
       saveVal = state.filter(todo => todo.id !== action.id);
-      localStorage.setItem("toDos", JSON.stringify(saveVal));
+      setItem(saveVal);
       return saveVal;
     default:
       return state;
